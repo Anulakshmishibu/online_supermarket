@@ -1,0 +1,126 @@
+{% include 'aheader.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>View Category</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .form-container {
+            margin-top: 50px;
+        }
+        .card {
+            width: 350px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .categories-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        .category-card {
+            background-color: aliceblue;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            width: 1000px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .category-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 60%;
+        }
+        .category-details h5 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .category-actions {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        .category-actions a {
+            margin: 5px;
+            color: white;
+        }
+        .btn-success {
+            width: 150px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div class="form-container">
+            <div class="card">
+                <div class="header">
+                    <h3 style="color: aliceblue;">Add Categories</h3>
+                </div>
+                <form method="post">
+                    {% if data['up'] %}
+                    <table>
+                        <tr>
+                            <th style="color: aliceblue;">Categories</th>
+                            <td><input type="text" name="category_name" value="{{ data['up'][0]['category_name'] }}" class="form-control" required></td>
+                        </tr> 
+                    </table>
+                    <br>
+                    <input type="submit" name="update" value="Update" class="btn btn-primary">
+                    {% else %}
+                    <table>
+                        <tr>
+                            <th style="color: aliceblue;">Categories</th>
+                            <td><input type="text" name="category_name" class="form-control" required></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                    {% endif %}
+                </form>
+            </div>
+        </div> 
+
+        <div class="blog-card">
+            <h3 style="color: #fffbfb;">Categories</h3>
+            <div class="categories-container">
+                {% for i in data['cat'] %}
+                <div class="category-card">
+                    <div class="category-details">
+                        <h5 >{{ i['category_name'] }}</h5>
+                    </div>
+                    <div class="category-actions">
+                        <a href="aproduct?action=viewproducts&category_id={{ i['category_id'] }}" class="btn btn-success">View Products</a>
+                        <a href="?action=update&category_id={{ i['category_id'] }}" class="btn btn-success">Update</a>
+                        <a href="?action=delete&category_id={{ i['category_id'] }}" class="btn btn-success">Delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </center>
+</body>
+</html>
+{% include 'footer.html' %}

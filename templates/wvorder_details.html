@@ -1,0 +1,55 @@
+{%include 'wheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card .price {
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <div class="card-container">
+            {%for i in data['res']%}
+            <div class="card">
+                <h3>{{i['product_name']}}</h3>
+                <p>Quantity: {{i['quantity']}}</p>
+                <p>Amount: <span class="price">{{i['amount']}}</span></p>
+                <p>Total: <span class="price">{{i['total']}}</span></p>
+            </div>
+            {%endfor%}
+        </div>
+    </form>
+</body>
+</html>
+{%include 'footer.html'%}

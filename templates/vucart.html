@@ -1,0 +1,85 @@
+{%include 'uheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .cart-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .cart-card {
+            min-width: 300px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        .cart-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .cart-title {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .cart-status {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .cart-total {
+            font-size: 1.2rem;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .btn-buy-now {
+            display: block;
+            margin-top: 10px;
+        }
+        
+        /* Horizontal scrollbar styling */
+        .cart-container::-webkit-scrollbar {
+            height: 10px;
+        }
+
+        .cart-container::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 10px;
+        }
+
+        .cart-container::-webkit-scrollbar-thumb:hover {
+            background-color: #888;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h3 style="color: #333;">Your Cart</h3>
+        <div class="cart-container">
+            {% for i in data['cart'] %}
+            <div class="cart-card">
+                <div class="cart-title">Item {{loop.index}}</div>
+                <div class="cart-total">Total: ${{i['total']}}</div>
+                <div class="cart-status">Status: {{i['status']}}</div>
+                {% if i['status'] == 'acceptorder' %}
+                <a href="payment?order_master_id={{i['order_master_id']}}&total={{i['total']}}" class="btn btn-success btn-buy-now">Buy Now</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </center>
+</body>
+</html><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{%include 'footer.html'%}

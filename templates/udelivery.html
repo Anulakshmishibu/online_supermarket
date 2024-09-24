@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>delivery boy</title>
+</head>
+<body>
+    <center>
+        <h3>delivery boy details</h3>
+        <form method="post">
+            <table>
+                <tr>
+                    <th>delivery boy name</th>
+                    <th>phone</th>
+                </tr>
+                {%for i in data['deli']%}
+                <tr>
+                    <td>{{i['fname']}}</td>
+                    <td>{{i['phone']}}</td>
+                </tr>
+                {%endfor%}
+            </table>
+        </form>
+    </center>
+</body>
+</html>

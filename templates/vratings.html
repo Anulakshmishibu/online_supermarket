@@ -1,0 +1,76 @@
+{%include 'uheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Cart - Product Rating</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            position: relative;
+            width: 300px;
+        }
+
+        .card h4 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .stars {
+            color: gold;
+            margin-bottom: 10px;
+        }
+
+        .review {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <form method="post">
+            <h3 style="color: aliceblue;">Product Rating</h3>
+            <div class="container">
+                {% for i in data['rate'] %}
+                <div class="card">
+                    <h4>Product Name: {{ i['product_name'] }}</h4>
+                    <p><strong>Username:</strong> {{ i['first_name'] }}</p>
+                    <p><img src="{{i['image']}}" alt="" width="50px" height="50px"></p>
+                    <div class="stars">
+                        {% set rating = i['rate']|int %}
+                        {% for star in range(rating) %}
+                        &#9733; <!-- Filled star -->
+                        {% endfor %}
+                        {% for star in range(5 - rating) %}
+                        &#9734; <!-- Empty star -->
+                        {% endfor %}
+                    </div>
+                    <p class="review"><strong>Review:</strong> "{{ i['review'] }}"</p>
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+    </center>
+
+</body>
+
+</html><br><br><br><br><br><br><br><br><br><br>
+{%include 'footer.html'%}

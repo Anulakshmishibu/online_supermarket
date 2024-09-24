@@ -1,0 +1,155 @@
+{%include 'sheader.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Products</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .form-container, .product-details-container {
+            margin-top: 50px;
+        }
+
+        .card {
+            width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: transparent;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .product-details-container {
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .product-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <center>
+       
+        <div class="form-container">
+            <div class="card">
+                <div class="header">
+                    <h3 style="color: aliceblue;">Add Products</h3>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% if data['up'] %}
+                    <table>
+                        <!-- <tr>
+                            <th style="color: aliceblue;">Category</th>
+                            <td>
+                                <select name="category_name" class="form-control">
+                                    <option value="{{data['up'][0]['category_name']}}" selected disabled hidden>{{data['up'][0]['category_name']}}</option>
+                                    {% for i in data['cat'] %}
+                                    <option value="{{i['category_id']}}">{{i['category_name']}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <th style="color: aliceblue;">Product</th>
+                            <td><input type="text" name="product_name" value="{{data['up'][0]['product_name']}}" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th style="color: aliceblue;">Product Details</th>
+                            <td><textarea name="details" class="form-control">{{data['up'][0]['details']}}</textarea></td>
+                        </tr>
+                        <tr>
+                            <th style="color: aliceblue;">Price</th>
+                            <td><input type="text" name="price" value="{{data['up'][0]['price']}}" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th style="color: aliceblue;">Image</th>
+                            <td><input type="file" name="image" class="form-control"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" name="update" value="Update" class="btn btn-primary">
+                    {% else %}
+                    <table>
+                        <!-- <tr>
+                            <th style="color: aliceblue;">Category</th>
+                            <td>
+                                <select name="category_name" class="form-control">
+                                    <option value="" selected disabled hidden>Select</option>
+                                    {% for i in data['cat'] %}
+                                    <option value="{{i['category_id']}}">{{i['category_name']}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                        </tr> -->
+                        <tr>
+                            <th style="color: aliceblue;">Product</th>
+                            <td><input type="text" name="product_name" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th style="color: aliceblue;">Product Details</th>
+                            <td><textarea name="details" class="form-control"></textarea></td>
+                        </tr>
+                        <tr>
+                            <th style="color: aliceblue;">Price</th>
+                            <td><input type="text" name="price" class="form-control"></td>
+                        </tr>
+                        <tr>
+                            <th style="color: aliceblue;">Image</th>
+                            <td><input type="file" name="image" class="form-control"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <div class="product-details-container">
+            <h3 style="color: aliceblue;">Product Details</h3>
+            <div class="row">
+                {% for i in data['pro'] %}
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="{{ i['image'] }}" alt="Product Image">
+                        <h5>{{ i['product_name'] }}</h5>
+                        <p><strong>Category:</strong> {{ i['category_name'] }}</p>
+                        <p><strong>Details:</strong> {{ i['details'] }}</p>
+                        <p><strong>Price:</strong> {{ i['price'] }}</p>
+                        <a href="?action=update&product_id={{i['product_id']}}&category_id={{i['category_id']}}" class="btn btn-success">Update</a>
+                        <a href="?action=delete&product_id={{i['product_id']}}&category_id={{i['category_id']}}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </center>
+</body>
+</html>
+{%include 'footer.html'%}

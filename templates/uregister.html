@@ -1,0 +1,81 @@
+{%include 'public_header.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <title>Register</title>
+    <style>
+        .card {
+                width: 350px;
+                height: 350px;
+                display: flex;
+                background-color: transparent;
+                
+                align-items: center;
+                justify-content: center;
+            }
+            .header {
+                text-align: center;
+                font-size: 24px;
+            }
+            
+    </style>
+</head>
+<body><br><br><br><br><br><br>
+    
+    <center>
+        <div class="card">
+        <div class="header">
+        <h3 style="color: aliceblue;">User Registration</h3>
+        </div>
+        <form method="post">
+            <table>
+                <tr>
+                    <th style="color: aliceblue;">First Name</th>
+                    <td><input type="text" name="first_name" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">Last Name</th>
+                    <td><input type="text" name="last_name" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">House Name</th>
+                    <td><input type="text" name="house_name" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">place</th>
+                    <td><input type="text" name="place" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">landmark</th>
+                    <td><input type="text" name="landmark" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">pincode</th>
+                    <td><input type="text" name="pincode" class="form-control" required pattern="\d{6}"></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">phone</th>
+                    <td><input type="text" name="phone" class="form-control" required pattern="\d{10}" title="must contain 10 digits"></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">email</th>
+                    <td><input type="text" name="email" class="form-control" required></td>
+                </tr>
+                <tr>
+                    <th style="color: aliceblue;">password</th>
+                    <td><input type="password" name="password" class="form-control"  required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></td>
+                </tr>
+                
+            </table>
+            <td><input type="submit" name="submit" value="submit" class="btn btn-success"></td>
+
+        </form>
+        </div>
+    </center>
+    <br><br><br><br><br><br>
+   
+</body>
+</html>
+{%include 'footer.html'%}

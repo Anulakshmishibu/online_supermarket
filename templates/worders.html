@@ -1,0 +1,76 @@
+{% include 'wheader.html' %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Orders</title>
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: left;
+            width: 300px;
+            height: 400px;
+        }
+
+        .card h4 {
+            margin: 10px 0;
+        }
+
+        .card p {
+            margin: 5px 0;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .card a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Dispatched Products</h3>
+    <center>
+        <form method="post">
+            <div class="container">
+                {% for i in data['dis'] %}
+                <div class="card">
+                    <h4>Product name: {{i['product_name']}}</h4>
+                    <h6>Category name: {{i['category_name']}}</h6>
+                    <p><strong>Name:</strong> {{i['first_name']}}</p>
+                    <p><strong>House Name:</strong> {{i['house_name']}}</p>
+                    <p><strong>Landmark:</strong> {{i['landmark']}}</p>
+                    <p><strong>Pincode:</strong> {{i['pincode']}}</p>
+                    <p><strong>Phone:</strong> {{i['phone']}}</p>
+                    <a href="?action=pickup&order_details_id={{i['order_details_id']}}&order_master_id={{i['order_master_id']}}">
+                        Pick Up
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+    </center>
+</body>
+
+</html>
+{% include 'footer.html' %}
